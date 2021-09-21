@@ -29,9 +29,13 @@ namespace BlackJack
 
             //Card pack preparation
 
+            Console.WriteLine("Entrez votre nom : ");
+            string playerName = Console.ReadLine();
+            Console.WriteLine("Combien de decks voulez vous dans le paquet ?");
+            int deckAmount = Int32.Parse(Console.ReadLine());
             List<string> paquet = new List<string>();
             List<string> tempPaquet = new List<string>();
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 8 * deckAmount; i++)
             {
                 foreach (KeyValuePair<string, int> kvp in valeurCartes)
                 {
@@ -56,7 +60,7 @@ namespace BlackJack
 
             //Hand display
 
-            Console.WriteLine("Humain : {0} / {1}", joueurH[0], joueurH[1]);
+            Console.WriteLine(playerName + " : {0} / {1}", joueurH[0], joueurH[1]);
             Console.WriteLine("Ordinateur : ? / {0}", joueurO[1]);
 
             //Turn
@@ -78,13 +82,13 @@ namespace BlackJack
 
                     if (choixJoueur == "o")
                     {
-                        Console.WriteLine("Humain : Je pioche.");
+                        Console.WriteLine(playerName + " : Je pioche.");
                         joueurH.Add(paquet.Last());
                         paquet.Remove(paquet.Last());
                     }
                     else if (choixJoueur == "n")
                     {
-                        Console.WriteLine("Humain : Je m'arrête là.");
+                        Console.WriteLine(playerName + " : Je m'arrête là.");
                         stopJoueur = true;
                     }
                     else
@@ -115,7 +119,7 @@ namespace BlackJack
                         }
                     }
 
-                    Console.WriteLine("Humain : ");
+                    Console.WriteLine(playerName + " : ");
                     Console.WriteLine(string.Join(" ", joueurH));
                     Console.WriteLine("Ordinateur : ");
                     Console.WriteLine("? " + string.Join(" ", joueurH.Skip(1)));
@@ -140,3 +144,7 @@ namespace BlackJack
         }
     }
 }
+
+//TODO : fonction de score
+//TODO : déterminer le winner
+//TODO : soft hands
