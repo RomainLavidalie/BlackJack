@@ -67,9 +67,10 @@ namespace BlackJack
 
             // Hand display
 
-            Console.WriteLine("( " + Score(joueurH, valeurCartes) + " pts ) " + playerName + " : {0} / {1}", joueurH[0],
-                joueurH[1]);
-            Console.WriteLine("( " + Score(joueurO, valeurCartes) + " pts ) " + "Ordinateur : ? / {0}", joueurO[1]);
+            Console.WriteLine("( " + Score(joueurH, valeurCartes) + " pts ) " + playerName + " : ");
+            Console.WriteLine(string.Join(" ", joueurH));
+            Console.WriteLine("( " + Score(joueurO, valeurCartes) + " pts ) " + "Ordinateur : ");
+            Console.WriteLine("? " + string.Join(" ", joueurO.Skip(1)));
 
             // Turn
 
@@ -126,6 +127,7 @@ namespace BlackJack
                             stopOrdinateur = true;
                         }
                     }
+
                     Console.WriteLine("( " + Score(joueurH, valeurCartes) + " pts ) " + playerName + " : ");
                     Console.WriteLine(string.Join(" ", joueurH));
                     Console.WriteLine("( " + Score(joueurO, valeurCartes) + " pts ) " + "Ordinateur : ");
@@ -133,7 +135,7 @@ namespace BlackJack
 
                     // Endgame
 
-                    if (stopOrdinateur && stopJoueur)
+                    if ((stopOrdinateur && stopJoueur) || Score(joueurH, valeurCartes) == 21 || Score(joueurO, valeurCartes) == 21)
                     {
                         finPartie = true;
                         if (Score(joueurH, valeurCartes) > Score(joueurO, valeurCartes))
