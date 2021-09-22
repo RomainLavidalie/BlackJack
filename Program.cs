@@ -6,9 +6,18 @@ namespace BlackJack
 {
     internal class Program
     {
+        public static int Score(List<string> mainJoueur, Dictionary<string, int> valeurCartes)
+        {
+            int currentScore = 0;
+
+            foreach (string card in mainJoueur)
+                currentScore += valeurCartes[card];
+            return currentScore;
+        }
+
         public static void Main(string[] args)
         {
-            //Initialization
+            // Initialization
 
             Dictionary<string, int> valeurCartes = new Dictionary<string, int>();
             valeurCartes.Add("A", 1);
@@ -27,7 +36,7 @@ namespace BlackJack
             List<string> joueurH = new List<string>();
             List<string> joueurO = new List<string>();
 
-            //Card pack preparation
+            // Card pack preparation
 
             Console.WriteLine("Entrez votre nom : ");
             string playerName = Console.ReadLine();
@@ -45,10 +54,10 @@ namespace BlackJack
             }
 
             tempPaquet = tempPaquet.OrderBy(x => Guid.NewGuid()).ToList();
-            
+
             Console.WriteLine(string.Join(" ", tempPaquet));
 
-            //Card distribution
+            // Card distribution
 
             for (int i = 0; i < 2; i++)
             {
@@ -58,18 +67,19 @@ namespace BlackJack
                 paquet.Remove(paquet.Last());
             }
 
-            //Hand display
+            // Hand display
 
-            Console.WriteLine(playerName + " : {0} / {1}", joueurH[0], joueurH[1]);
-            Console.WriteLine("Ordinateur : ? / {0}", joueurO[1]);
+            Console.WriteLine("( " + Score(joueurH, valeurCartes) + " pts ) " + playerName + " : {0} / {1}", joueurH[0],
+                joueurH[1]);
+            Console.WriteLine("( " + Score(joueurO, valeurCartes) + " pts ) " + "Ordinateur : ? / {0}", joueurO[1]);
 
-            //Turn
+            // Turn
 
             bool stopJoueur = false;
             bool stopOrdinateur = false;
             bool finPartie = false;
 
-            //Player decision
+            // Player decision
 
             while (finPartie == false)
             {
@@ -119,32 +129,37 @@ namespace BlackJack
                         }
                     }
 
-                    Console.WriteLine(playerName + " : ");
+                    Console.WriteLine("( " + Score(joueurH, valeurCartes) + " pts ) " + playerName + " : ");
                     Console.WriteLine(string.Join(" ", joueurH));
-                    Console.WriteLine("Ordinateur : ");
+                    Console.WriteLine("( " + Score(joueurO, valeurCartes) + " pts ) " + "Ordinateur : ");
                     Console.WriteLine("? " + string.Join(" ", joueurH.Skip(1)));
 
-                    //Endgame
+                    // Endgame
 
-                    int sumJoueur = 0;
-                    int sumOrdinateur = 0;
-
-                    foreach (string card in joueurH)
-                        sumJoueur += valeurCartes[card];
-                    foreach (string card in joueurO)
-                        sumOrdinateur += valeurCartes[card]
-                            ;
-
-                    if (stopOrdinateur == true && stopJoueur == true)
+                    if (stopOrdinateur && stopJoueur)
+                    {
                         finPartie = true;
-                    if (sumJoueur > 21 || sumOrdinateur > 21)
+                        if (Score(joueurH, valeurCartes) > Score(joueurO, valeurCartes))
+                            Console.WriteLine("Vous avez gagné cette main !");
+                        else
+                            Console.WriteLine("Vous avez perdu cette main.");
+                    }
+
+                    if (Score(joueurH, valeurCartes) > 21)
+                    {
                         finPartie = true;
+                        Console.WriteLine("Vous avez bust ! Le croupier gagne.");
+                    }
+                    else if (Score(joueurO, valeurCartes) > 21)
+                    {
+                        finPartie = true;
+                        Console.WriteLine("Le croupier a bust ! Vous gagnez.");
+                    }
                 }
             }
         }
     }
 }
 
-//TODO : fonction de score
-//TODO : déterminer le winner
-//TODO : soft hands
+// TODO : debug score
+// TODO : soft hands
