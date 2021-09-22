@@ -44,7 +44,7 @@ namespace BlackJack
             int deckAmount = Int32.Parse(Console.ReadLine());
             List<string> paquet = new List<string>();
             List<string> tempPaquet = new List<string>();
-            for (int i = 0; i < 8 * deckAmount; i++)
+            for (int i = 0; i < 4 * deckAmount; i++)
             {
                 foreach (KeyValuePair<string, int> kvp in valeurCartes)
                 {
@@ -53,18 +53,16 @@ namespace BlackJack
                 }
             }
 
-            tempPaquet = tempPaquet.OrderBy(x => Guid.NewGuid()).ToList();
-
-            Console.WriteLine(string.Join(" ", tempPaquet));
+            paquet = paquet.OrderBy(x => Guid.NewGuid()).ToList();
 
             // Card distribution
 
             for (int i = 0; i < 2; i++)
             {
                 joueurH.Add(paquet.Last());
-                paquet.Remove(paquet.Last());
+                paquet.RemoveAt(paquet.Count - 1);
                 joueurO.Add(paquet.Last());
-                paquet.Remove(paquet.Last());
+                paquet.RemoveAt(paquet.Count - 1);
             }
 
             // Hand display
@@ -94,7 +92,7 @@ namespace BlackJack
                     {
                         Console.WriteLine(playerName + " : Je pioche.");
                         joueurH.Add(paquet.Last());
-                        paquet.Remove(paquet.Last());
+                        paquet.RemoveAt(paquet.Count - 1);
                     }
                     else if (choixJoueur == "n")
                     {
@@ -120,7 +118,7 @@ namespace BlackJack
                         {
                             Console.WriteLine("Ordinateur : Je pioche.");
                             joueurO.Add(paquet.Last());
-                            paquet.Remove(paquet.Last());
+                            paquet.RemoveAt(paquet.Count - 1);
                         }
                         else
                         {
@@ -128,11 +126,10 @@ namespace BlackJack
                             stopOrdinateur = true;
                         }
                     }
-
                     Console.WriteLine("( " + Score(joueurH, valeurCartes) + " pts ) " + playerName + " : ");
                     Console.WriteLine(string.Join(" ", joueurH));
                     Console.WriteLine("( " + Score(joueurO, valeurCartes) + " pts ) " + "Ordinateur : ");
-                    Console.WriteLine("? " + string.Join(" ", joueurH.Skip(1)));
+                    Console.WriteLine("? " + string.Join(" ", joueurO.Skip(1)));
 
                     // Endgame
 
@@ -161,5 +158,4 @@ namespace BlackJack
     }
 }
 
-// TODO : debug score
 // TODO : soft hands
