@@ -105,55 +105,57 @@ namespace BlackJack
                         Console.WriteLine("Réponse invalide.");
                         continue;
                     }
+                }
 
-                    if (stopOrdinateur == false)
+
+                if (stopOrdinateur == false)
+                {
+                    int sumMainOrdinateur = 0;
+
+                    foreach (string card in joueurO)
                     {
-                        int sumMainOrdinateur = 0;
-
-                        foreach (string card in joueurO)
-                        {
-                            sumMainOrdinateur += valeurCartes[card];
-                        }
-
-                        if (sumMainOrdinateur < 15)
-                        {
-                            Console.WriteLine("Ordinateur : Je pioche.");
-                            joueurO.Add(paquet.Last());
-                            paquet.RemoveAt(paquet.Count - 1);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Ordinateur : Je m'arrête là.");
-                            stopOrdinateur = true;
-                        }
+                        sumMainOrdinateur += valeurCartes[card];
                     }
 
-                    Console.WriteLine("( " + Score(joueurH, valeurCartes) + " pts ) " + playerName + " : ");
-                    Console.WriteLine(string.Join(" ", joueurH));
-                    Console.WriteLine("( " + Score(joueurO, valeurCartes) + " pts ) " + "Ordinateur : ");
-                    Console.WriteLine("? " + string.Join(" ", joueurO.Skip(1)));
-
-                    // Endgame
-
-                    if ((stopOrdinateur && stopJoueur) || Score(joueurH, valeurCartes) == 21 || Score(joueurO, valeurCartes) == 21)
+                    if (sumMainOrdinateur < 15)
                     {
-                        finPartie = true;
-                        if (Score(joueurH, valeurCartes) > Score(joueurO, valeurCartes))
-                            Console.WriteLine("Vous avez gagné cette main !");
-                        else
-                            Console.WriteLine("Vous avez perdu cette main.");
+                        Console.WriteLine("Ordinateur : Je pioche.");
+                        joueurO.Add(paquet.Last());
+                        paquet.RemoveAt(paquet.Count - 1);
                     }
+                    else
+                    {
+                        Console.WriteLine("Ordinateur : Je m'arrête là.");
+                        stopOrdinateur = true;
+                    }
+                }
 
-                    if (Score(joueurH, valeurCartes) > 21)
-                    {
-                        finPartie = true;
-                        Console.WriteLine("Vous avez bust ! Le croupier gagne.");
-                    }
-                    else if (Score(joueurO, valeurCartes) > 21)
-                    {
-                        finPartie = true;
-                        Console.WriteLine("Le croupier a bust ! Vous gagnez.");
-                    }
+                Console.WriteLine("( " + Score(joueurH, valeurCartes) + " pts ) " + playerName + " : ");
+                Console.WriteLine(string.Join(" ", joueurH));
+                Console.WriteLine("( " + Score(joueurO, valeurCartes) + " pts ) " + "Ordinateur : ");
+                Console.WriteLine("? " + string.Join(" ", joueurO.Skip(1)));
+
+                // Endgame
+
+                if ((stopOrdinateur && stopJoueur) || Score(joueurH, valeurCartes) == 21 ||
+                    Score(joueurO, valeurCartes) == 21)
+                {
+                    finPartie = true;
+                    if (Score(joueurH, valeurCartes) > Score(joueurO, valeurCartes))
+                        Console.WriteLine("Vous avez gagné cette main !");
+                    else
+                        Console.WriteLine("Vous avez perdu cette main.");
+                }
+
+                if (Score(joueurH, valeurCartes) > 21)
+                {
+                    finPartie = true;
+                    Console.WriteLine("Vous avez bust ! Le croupier gagne.");
+                }
+                else if (Score(joueurO, valeurCartes) > 21)
+                {
+                    finPartie = true;
+                    Console.WriteLine("Le croupier a bust ! Vous gagnez.");
                 }
             }
         }
@@ -161,3 +163,4 @@ namespace BlackJack
 }
 
 // TODO : soft hands
+// TODO : laisser le CPU jouer s'il le veut
