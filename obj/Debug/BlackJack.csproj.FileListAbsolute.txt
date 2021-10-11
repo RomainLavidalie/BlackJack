@@ -4,3 +4,9 @@ D:\BlackJack\bin\Debug\BlackJack.exe
 D:\BlackJack\bin\Debug\BlackJack.pdb
 D:\BlackJack\obj\Debug\BlackJack.exe
 D:\BlackJack\obj\Debug\BlackJack.pdb
+D:\ENJMIN\Notions C#\BlackJack\bin\Debug\BlackJack.exe
+D:\ENJMIN\Notions C#\BlackJack\bin\Debug\BlackJack.pdb
+D:\ENJMIN\Notions C#\BlackJack\obj\Debug\BlackJack.csprojAssemblyReference.cache
+D:\ENJMIN\Notions C#\BlackJack\obj\Debug\BlackJack.csproj.CoreCompileInputs.cache
+D:\ENJMIN\Notions C#\BlackJack\obj\Debug\BlackJack.exe
+D:\ENJMIN\Notions C#\BlackJack\obj\Debug\BlackJack.pdb

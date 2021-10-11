@@ -1,0 +1,6 @@
+D:\ENJMIN\Notions C#\BlackJack\bin\Release\BlackJack.exe
+D:\ENJMIN\Notions C#\BlackJack\bin\Release\BlackJack.pdb
+D:\ENJMIN\Notions C#\BlackJack\obj\Release\BlackJack.csprojAssemblyReference.cache
+D:\ENJMIN\Notions C#\BlackJack\obj\Release\BlackJack.csproj.CoreCompileInputs.cache
+D:\ENJMIN\Notions C#\BlackJack\obj\Release\BlackJack.exe
+D:\ENJMIN\Notions C#\BlackJack\obj\Release\BlackJack.pdb

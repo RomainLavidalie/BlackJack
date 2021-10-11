@@ -159,6 +159,7 @@ namespace BlackJack
                 }
             }
         }
+        string stall = Console.ReadLine();
     }
 }
 
